@@ -6,14 +6,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-public class ConsultEndPointOriginGatewayGateway implements GetEndPointOriginGateway {
+public class ConsultEndPointOriginGateway implements GetEndPointOriginGateway {
 
     private final RestTemplate restTemplate;
     private final Origin origin;
 
     //inyeccion de dependecia en el que suministra objetos a una clase
     //En lugar de ser la propia clase cree dichos objetos
-    public ConsultEndPointOriginGatewayGateway(RestTemplate restTemplate, Origin origin) {
+    public ConsultEndPointOriginGateway(RestTemplate restTemplate, Origin origin) {
         this.restTemplate = restTemplate;
         this.origin = origin;
     }

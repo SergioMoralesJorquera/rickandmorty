@@ -6,12 +6,12 @@ import cl.mobdev.trainee.rickandmorty.models.Origin;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GetCharacterByIdUseCase implements GetCharacterById {
+public class GetCharacterByIdGatewayUseCase implements GetCharacterByIdGateway {
 
     private final GetEndpointRootGateway getEndpointRootGateway;
     private final GetEndPointOriginGateway getEndPointOriginGateway;
 
-    public GetCharacterByIdUseCase(GetEndpointRootGateway getEndpointRootGateway, GetEndPointOriginGateway getEndPointOriginGateway) {
+    public GetCharacterByIdGatewayUseCase(GetEndpointRootGateway getEndpointRootGateway, GetEndPointOriginGateway getEndPointOriginGateway) {
         this.getEndpointRootGateway = getEndpointRootGateway;
         this.getEndPointOriginGateway = getEndPointOriginGateway;
     }

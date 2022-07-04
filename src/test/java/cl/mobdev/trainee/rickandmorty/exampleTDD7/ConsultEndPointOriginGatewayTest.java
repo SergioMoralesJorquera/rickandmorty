@@ -3,7 +3,7 @@ import cl.mobdev.trainee.rickandmorty.gateway.GetEndPointOriginGateway;
 import cl.mobdev.trainee.rickandmorty.gateway.GetEndpointRootGateway;
 import cl.mobdev.trainee.rickandmorty.models.Character;
 import cl.mobdev.trainee.rickandmorty.models.Origin;
-import cl.mobdev.trainee.rickandmorty.services.GetCharacterByIdUseCase;
+import cl.mobdev.trainee.rickandmorty.services.GetCharacterByIdGatewayUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class ConsultEndPointOriginGatewayTest {
 
-    private GetCharacterByIdUseCase getCharacterByIdUseCase;
+    private GetCharacterByIdGatewayUseCase getCharacterByIdUseCase;
 
     //se mockea las dependencias
     @Mock
@@ -28,7 +28,7 @@ public class ConsultEndPointOriginGatewayTest {
 
     @BeforeEach
     void setUp(){
-        this.getCharacterByIdUseCase = new GetCharacterByIdUseCase(getEndpointRootGateway, getEndPointOriginGateway);
+        this.getCharacterByIdUseCase = new GetCharacterByIdGatewayUseCase(getEndpointRootGateway, getEndPointOriginGateway);
     }
 
     @Test
@@ -82,5 +82,4 @@ public class ConsultEndPointOriginGatewayTest {
         verify(getEndPointOriginGateway, never()).execute("");
 
     }
-
 }

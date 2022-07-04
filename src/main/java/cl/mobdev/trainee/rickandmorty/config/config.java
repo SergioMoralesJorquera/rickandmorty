@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class config {
-    @Bean//crear instancia de restamplate para ser usado en tod_o el programa
+    @Bean//crea instancia de restamplate para ser usado en tod_o el programa
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }

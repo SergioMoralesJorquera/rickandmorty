@@ -1,9 +1,9 @@
-package cl.mobdev.trainee.rickandmorty.exampleTDD8;
+package cl.mobdev.trainee.rickandmorty.testcontroller;
 import cl.mobdev.trainee.rickandmorty.controller.Controller;
 import cl.mobdev.trainee.rickandmorty.exception.CharacterNotFoundException;
 import cl.mobdev.trainee.rickandmorty.mocks.MockCharacter;
 import cl.mobdev.trainee.rickandmorty.models.Character;
-import cl.mobdev.trainee.rickandmorty.services.GetCharacterById;
+import cl.mobdev.trainee.rickandmorty.services.GetCharacterByIdGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -21,16 +21,16 @@ public class ControllerTest {
     private Controller controller;
 
     @Mock
-    private GetCharacterById getCharacterById;
+    private GetCharacterByIdGateway getCharacterByIdGateway;
 
     @BeforeEach
     void setUp(){
-        this.controller = new Controller(getCharacterById);
+        this.controller = new Controller(getCharacterByIdGateway);
     }
 
 
     @Test
-    void should_return_ok_status(){
+    void should_return_response_status_200_when_request_ok(){
 
         int statusExpected=200;
 
@@ -41,7 +41,7 @@ public class ControllerTest {
 
         Character character = MockCharacter.getCharacterStatus();
 
-        Mockito.when(getCharacterById.execute(1)).thenReturn(character);
+        Mockito.when(getCharacterByIdGateway.execute(1)).thenReturn(character);
 
         //When
         ResponseEntity<Character> response = controller.getCharactersForId(1);
@@ -52,34 +52,34 @@ public class ControllerTest {
     }
 
     @Test
-    void should_call_getCharacterById_once(){
+    void should_verify_call_method_getCharacterById_once_time(){
 
         //int timeExpected = 1;
 
         //Given
         Character character = MockCharacter.getCharacterStatus();//se utilizo el mismo 
-        Mockito.when(getCharacterById.execute(1)).thenReturn(character);
+        Mockito.when(getCharacterByIdGateway.execute(1)).thenReturn(character);
 
         //When
         ResponseEntity<Character> response = controller.getCharactersForId(1);
 
         //se invoque por una vez el método
         //Then
-        verify(getCharacterById).execute(1);
+        verify(getCharacterByIdGateway).execute(1);
+        verify(getCharacterByIdGateway, only()).execute(1);
+        verify(getCharacterByIdGateway,atLeastOnce()).execute(1);
 
     }
 
     @Test
-    void should_verify_trown_exception(){
-
+    void should_verify_trown_exception_when_character_not_found(){
 
         //Given
         Character character = MockCharacter.getCharacterStatus();
-        Mockito.when(getCharacterById.execute(1)).thenThrow(CharacterNotFoundException.class);
+        Mockito.when(getCharacterByIdGateway.execute(1)).thenThrow(CharacterNotFoundException.class);
 
         //when-then
         assertThrows(CharacterNotFoundException.class, ()-> controller.getCharactersForId(1));
-
 
         //se invoque por una vez el método
         //Then

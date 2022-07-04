@@ -9,13 +9,13 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class ConsultEndPointRootGatewayGateway implements GetEndpointRootGateway {
+public class ConsultEndPointRootGateway implements GetEndpointRootGateway {
 
     private final String url;
     private final RestTemplate restTemplate;
 
 
-    public ConsultEndPointRootGatewayGateway(@Value("${url}") String url, RestTemplate restTemplate) {
+    public ConsultEndPointRootGateway(@Value("${url}") String url, RestTemplate restTemplate) {
         this.url = url;
         this.restTemplate = restTemplate;
     }
